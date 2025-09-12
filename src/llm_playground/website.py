@@ -14,6 +14,6 @@ class Website:
         soup = BeautifulSoup(response.content, "html.parser")
         self.title = soup.title.string if soup.title else "No title found"
         # Remove irrelevant
-        for irrelevant in soup.body(["script", "style", "img", "input"]):
+        for irrelevant in soup.body(["script", "style", "img", "input"]): # type: ignore
             irrelevant.decompose()
         self.text = soup.get_text(separator="\n", strip=True)
