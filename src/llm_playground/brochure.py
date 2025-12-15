@@ -3,6 +3,8 @@ from llm_playground.website import Website
 from openai import OpenAI
 import json
 from dotenv import load_dotenv
+import asyncio
+from llm_playground.mcp import MCPFileSystem
 
 load_dotenv(override=True)
 
@@ -32,6 +34,7 @@ class BrochureGenerator:
     def __init__(self, url: str):
         self.url = url
         self.website = Website(url)
+        self.mcp_fs = MCPFileSystem("brochure_outputs")
 
     def create_brochure(self, company_name: str):
         stream = self.openai.chat.completions.create(
@@ -47,8 +50,14 @@ class BrochureGenerator:
         for chunk in stream:
             if chunk.choices and hasattr(chunk.choices[0].delta, "content"):
                 response += chunk.choices[0].delta.content or ""
-                print(response, end="", flush=True)
+                # print(response, end="", flush=True)
         # result = response.choices[0].message.content
+
+        # Saving file using MCP
+        filename = f"{self.mcp_fs.sanitize_filename(company_name)}.md"
+        print("Saving to file using MCP:", filename)
+        asyncio.run(self.mcp_fs.write_file(filename, response))
+
         return response
 
 
