@@ -7,8 +7,9 @@ def main(company_name: str, url: str):
     return brochure
 if __name__ == "__main__":
     # test_url = "https://huggingface.co"
-    test_url = "https://boskalis.com/"
-    test_company_name = "Hugging Face"
-    test_company_name = "Boskalis"
+    # test_url = "https://boskalis.com/"
+    test_url = "https://dubizzle.com/"
+    # test_company_name = "Hugging Face"
+    test_company_name = "Dubizzle"
     result = main(company_name=test_company_name, url=test_url)
 

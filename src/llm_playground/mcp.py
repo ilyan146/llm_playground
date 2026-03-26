@@ -31,7 +31,7 @@ class MCPFileSystem:
                     "write_file", arguments={"path": str(file_path.absolute()), "content": content}
                 )
 
-                print("File write result:", result)
+                # print("File write result:", result)
                 print(f"\nFile saved to: {file_path}")
                 return result
 
