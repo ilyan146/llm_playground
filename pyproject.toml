@@ -48,13 +48,13 @@ dependencies = [
     "sentence-transformers>=5.1.0",
     "feedparser>=6.0.12",
     "fastmcp>=2.14.1",
+    "loguru>=0.7.3",
 ]
 
 [[tool.uv.index]]
 name = "pypi"
 url = "https://pypi.org/simple"
 default = true
-explicit = true
 
 [build-system]
 requires = ["hatchling"]
