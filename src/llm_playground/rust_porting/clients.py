@@ -15,7 +15,7 @@ def get_clients() -> dict[str, OpenAI]:
     db = OpenAI(api_key=os.getenv("DATABRICKS_TOKEN"), base_url=os.getenv("DATABRICKS_BASE_URL"))
 
     return {
-        "gpt-4.1-mini": openai, "gpt-5.4": openai, "gpt-5": openai,
+        "gpt-4.1-mini": openai, "gpt-4o": openai, "gpt-5.4": openai, "gpt-5": openai,
         "gemini-2.5-flash": google, "gemini-2.5-flash-lite": google,
         "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B": hf,
         "openai/gpt-oss-20b:groq": hf, "openai/gpt-oss-120b": hf,
@@ -23,5 +23,5 @@ def get_clients() -> dict[str, OpenAI]:
         "Qwen/Qwen3-Coder-Next:novita": hf,
         "zai-org/GLM-5.1:together": hf,
         "MiniMaxAI/MiniMax-M2.7:novita": hf,
-        "databricks-claude-sonnet-4-6": db, "databricks-claude-3-7-sonnet": db,
+        "databricks-claude-sonnet-4-6": db, "databricks-claude-opus-4-6": db,
     }

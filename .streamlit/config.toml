@@ -1,11 +1,9 @@
-[theme]
-primaryColor = "#753991"
-backgroundColor = "#161a22"
-secondaryBackgroundColor = "#202631"
-textColor = "#e9eef5"
-
 # [theme]
 # primaryColor = "#753991"
-# backgroundColor = "#ffffff"
-# secondaryBackgroundColor = "#f0f2f6"
-# textColor = "#000000"
+# backgroundColor = "#161a22"
+# secondaryBackgroundColor = "#202631"
+# textColor = "#e9eef5"
+[theme]
+base="dark"
+primaryColor="slateBlue"
+codeBackgroundColor="#081e2b"

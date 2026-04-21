@@ -24,12 +24,22 @@ COMPILE_COMMAND = [
 RUN_COMMAND = [str(_DIR /"main.exe")]
 
 MODELS = [
-    "gpt-4.1-mini", "gpt-5.4", "openai/gpt-oss-20b:groq", "gpt-5",
-    "gemini-2.5-flash", "openai/gpt-oss-120b",
-    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", "gemini-2.5-flash-lite",
-    "moonshotai/Kimi-K2-Instruct:novita", "Qwen/Qwen3-Coder-Next:novita",
-    "zai-org/GLM-5.1:together", "MiniMaxAI/MiniMax-M2.7:novita",
-    "databricks-claude-sonnet-4-6", "databricks-claude-3-7-sonnet",
+    "gpt-4.1-mini",
+    "gpt-4o",
+    "openai/gpt-oss-20b:groq",
+    "openai/gpt-oss-120b",
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    "moonshotai/Kimi-K2-Instruct:novita",
+    "Qwen/Qwen3-Coder-Next:novita",
+    "zai-org/GLM-5.1:together",
+    "MiniMaxAI/MiniMax-M2.7:novita",
+    # Big Guys
+    "gpt-5",
+    "gpt-5.4",
+    "databricks-claude-sonnet-4-6",
+    "databricks-claude-opus-4-6",
 ]
 
 PYTHON_HARD = """

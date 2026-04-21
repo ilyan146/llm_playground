@@ -44,10 +44,6 @@ def port(model: str, python: str) -> str:
     }
     if "gpt-5" in model:
         kwargs["reasoning_effort"] = "high"
-
-    # logger.debug(f"Sending request to model with kwargs for completions.create: {kwargs}")
-
     response = client.chat.completions.create(**kwargs)
     reply = response.choices[0].message.content
-    # logger.debug(f"Received response from model: {reply[:500]}...")  # Log the first 500 chars of the response
     return reply.replace("```cpp", "").replace("```rust", "").replace("```", "")
