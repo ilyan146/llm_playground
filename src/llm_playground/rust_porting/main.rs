@@ -1,72 +1,52 @@
+
 use std::time::Instant;
 
-// Constants for LCG
-const A: u64 = 1664525;
-const C: u64 = 1013904223;
-const M: u64 = 1u64 << 32;
-
-struct Lcg {
-    state: u64,
+fn lcg_next(value: u64) -> u64 {
+    let a: u64 = 1664525;
+    let c: u64 = 1013904223;
+    let m: u64 = 1u64 << 32;
+    (a.wrapping_mul(value).wrapping_add(c)) % m
 }
 
-impl Lcg {
-    #[inline(always)]
-    fn new(seed: u64) -> Self {
-        Self { state: seed }
-    }
-
-    #[inline(always)]
-    fn next(&mut self) -> u64 {
-        self.state = self.state.wrapping_mul(A).wrapping_add(C) % M;
-        self.state
-    }
-}
-
-// Kadane's algorithm for max subarray sum
-#[inline(always)]
-fn max_subarray_sum(arr: &[i32]) -> i32 {
-    let mut max_ending_here = arr[0];
-    let mut max_so_far = arr[0];
-    for &x in &arr[1..] {
-        max_ending_here = max_ending_here.saturating_add(x).max(x);
-        max_so_far = max_so_far.max(max_ending_here);
-    }
-    max_so_far
-}
-
-// Generates the random numbers and finds max subarray sum
-fn max_subarray_sum_for_seed(n: usize, seed: u64, min_val: i32, max_val: i32) -> i32 {
+fn max_subarray_sum(n: usize, seed: u64, min_val: i64, max_val: i64) -> i64 {
     let range = (max_val - min_val + 1) as u64;
-
-    let mut lcg = Lcg::new(seed);
-
-    // Preallocate vector with capacity n
+    let mut value = seed;
     let mut random_numbers = Vec::with_capacity(n);
     for _ in 0..n {
-        // We cast lcg.next() to i32 range (min_val..max_val)
-        let val = (lcg.next() % range) as i32 + min_val;
-        random_numbers.push(val);
+        value = lcg_next(value);
+        let num = (value % range) as i64 + min_val;
+        random_numbers.push(num);
     }
-    max_subarray_sum(&random_numbers)
+
+    let mut max_sum = i64::MIN;
+    for i in 0..n {
+        let mut current_sum: i64 = 0;
+        for j in i..n {
+            current_sum += random_numbers[j];
+            if current_sum > max_sum {
+                max_sum = current_sum;
+            }
+        }
+    }
+    max_sum
 }
 
-fn total_max_subarray_sum(n: usize, initial_seed: u64, min_val: i32, max_val: i32) -> i64 {
+fn total_max_subarray_sum(n: usize, initial_seed: u64, min_val: i64, max_val: i64) -> i64 {
     let mut total_sum: i64 = 0;
-    let mut lcg = Lcg::new(initial_seed);
-
+    let mut value = initial_seed;
     for _ in 0..20 {
-        let seed = lcg.next();
-        let max_sum = max_subarray_sum_for_seed(n, seed, min_val, max_val);
-        total_sum += max_sum as i64;
+        value = lcg_next(value);
+        let seed = value;
+        total_sum += max_subarray_sum(n, seed, min_val, max_val);
     }
     total_sum
 }
 
 fn main() {
-    let n = 10_000;
-    let initial_seed = 42;
-    let min_val = -10;
-    let max_val = 10;
+    let n = 10000usize;
+    let initial_seed = 42u64;
+    let min_val = -10i64;
+    let max_val = 10i64;
 
     let start = Instant::now();
     let result = total_max_subarray_sum(n, initial_seed, min_val, max_val);
