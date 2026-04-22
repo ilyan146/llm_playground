@@ -35,6 +35,7 @@ MODELS = [
     "Qwen/Qwen3-Coder-Next:novita",
     "zai-org/GLM-5.1:together",
     "MiniMaxAI/MiniMax-M2.7:novita",
+    "Qwen/Qwen2.5-Coder-32B-Instruct:nscale",
     # Big Guys
     "gpt-5",
     "gpt-5.4",

@@ -24,4 +24,5 @@ def get_clients() -> dict[str, OpenAI]:
         "zai-org/GLM-5.1:together": hf,
         "MiniMaxAI/MiniMax-M2.7:novita": hf,
         "databricks-claude-sonnet-4-6": db, "databricks-claude-opus-4-6": db,
+        "Qwen/Qwen2.5-Coder-32B-Instruct:nscale": hf
     }
